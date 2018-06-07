@@ -8,23 +8,39 @@ const User = require('../models/user');
 //Register
 router.post('/register', (req, res) => {
     console.log(JSON.stringify(req.body))
-    let newUser = new User({
-        name: req.body.name,
-        email: req.body.email,
-        username: req.body.username,
-        password: req.body.password,
-    });
-    console.log(JSON.stringify(User))
-    console.log(JSON.stringify(newUser))
 
+    User.getUserByEmail(req.body.email, (err, userByEmail) => {
 
-    User.addUser(newUser, (err, user) => {
         if (err) {
             res.json({ 'success': false, 'msg': 'Failed to register user' })
         } else {
-            res.json({ 'success': true, 'msg': 'user registered' })
+
+            if (userByEmail) {
+                console.log('Fetcheced Email' + userByEmail.email)
+                res.json({ 'success': false, 'msg': 'Email already exists! please enter another email' })
+            } else {
+                let newUser = new User({
+                    name: req.body.name,
+                    email: req.body.email,
+                    username: req.body.username,
+                    password: req.body.password,
+                });
+
+                User.addUser(newUser, (err, user) => {
+                    if (err) {
+                        res.json({ 'success': false, 'msg': 'Failed to register user' })
+                    } else {
+                        res.json({ 'success': true, 'msg': 'user registered' })
+                    }
+                })
+            }
+
         }
+
+
     })
+
+
     // res.send('Register')
     // console.log('register')
 })

@@ -33,6 +33,12 @@ module.exports.getUserByUsername = function (username, cb) {
     User.findOne(query, cb)
 }
 
+module.exports.getUserByEmail = function (email, cb) {
+    console.log(email)
+    const query = { email: email }
+    User.findOne(query, cb)
+}
+
 module.exports.addUser = function (newUserObj, cb) {
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUserObj.password, salt, (err, hash) => {
