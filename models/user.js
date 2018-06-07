@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs')
 //const config = require("./config/databse")
 
-//User Schema
+//User Schema model
 const UserSchema = mongoose.Schema({
     name: {
         type: String
