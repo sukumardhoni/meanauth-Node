@@ -51,9 +51,9 @@ app.get('/', (req, res) => {``
     console.log('/ root index route.');
 })
 
-app.get('*', (req,res) => {
-    res.sendfile(path.join(__dirname, 'public/index.html'))
-})
+// app.get('*', (req,res) => {
+//     res.sendfile(path.join(__dirname, 'public/index.html'))
+// })
 
 //Start Server
 app.listen(port, () => {
