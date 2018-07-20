@@ -22,9 +22,10 @@ mongoose.connection.on('err', () => {
 const app = express();
 
 const users = require('./routes/users')
+const posts = require('./routes/posts')
 
 //Port Number
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 //CORS Middleware
 app.use(cors());
@@ -44,6 +45,9 @@ require('./config/passport')(passport);
 //Users Routes
 app.use('/users', users);
 //console.log(users)
+
+//Users Routes
+app.use('/api', posts);
 
 //Index Route
 app.get('/', (req, res) => {``
